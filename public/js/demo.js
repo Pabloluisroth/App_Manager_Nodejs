@@ -40,7 +40,7 @@
   ]
 
   $container.append(
-    '<h5>Customize AdminLTE</h5><hr class="mb-2"/>'
+    '<h5>Customize your Session</h5><hr class="mb-2"/>'
   )
 
   var $no_border_checkbox = $('<input />', {
@@ -55,7 +55,7 @@
       $('.main-header').removeClass('border-bottom-0')
     }
   })
-  var $no_border_container = $('<div />', {'class': 'mb-1'}).append($no_border_checkbox).append('<span>No Navbar border</span>')
+  var $no_border_container = $('<div />', {'class': 'mb-1'}).append($no_border_checkbox).append('<span>Sin borde de barra de navegación</span>')
   $container.append($no_border_container)
 
   var $text_sm_body_checkbox = $('<input />', {
@@ -70,7 +70,7 @@
       $('body').removeClass('text-sm')
     }
   })
-  var $text_sm_body_container = $('<div />', {'class': 'mb-1'}).append($text_sm_body_checkbox).append('<span>Body small text</span>')
+  var $text_sm_body_container = $('<div />', {'class': 'mb-1'}).append($text_sm_body_checkbox).append('<span>Cuerpo de texto pequeño</span>')
   $container.append($text_sm_body_container)
 
   var $text_sm_header_checkbox = $('<input />', {
@@ -85,7 +85,7 @@
       $('.main-header').removeClass('text-sm')
     }
   })
-  var $text_sm_header_container = $('<div />', {'class': 'mb-1'}).append($text_sm_header_checkbox).append('<span>Navbar small text</span>')
+  var $text_sm_header_container = $('<div />', {'class': 'mb-1'}).append($text_sm_header_checkbox).append('<span>Navegacion texto pequeño</span>')
   $container.append($text_sm_header_container)
 
   var $text_sm_sidebar_checkbox = $('<input />', {
@@ -100,7 +100,7 @@
       $('.nav-sidebar').removeClass('text-sm')
     }
   })
-  var $text_sm_sidebar_container = $('<div />', {'class': 'mb-1'}).append($text_sm_sidebar_checkbox).append('<span>Sidebar nav small text</span>')
+  var $text_sm_sidebar_container = $('<div />', {'class': 'mb-1'}).append($text_sm_sidebar_checkbox).append('<span>Navegacion lateral texto pequeño</span>')
   $container.append($text_sm_sidebar_container)
 
   var $text_sm_footer_checkbox = $('<input />', {
@@ -115,7 +115,7 @@
       $('.main-footer').removeClass('text-sm')
     }
   })
-  var $text_sm_footer_container = $('<div />', {'class': 'mb-1'}).append($text_sm_footer_checkbox).append('<span>Footer small text</span>')
+  var $text_sm_footer_container = $('<div />', {'class': 'mb-1'}).append($text_sm_footer_checkbox).append('<span>Pie de pagina texto pequeño</span>')
   $container.append($text_sm_footer_container)
 
   var $flat_sidebar_checkbox = $('<input />', {
@@ -130,7 +130,7 @@
       $('.nav-sidebar').removeClass('nav-flat')
     }
   })
-  var $flat_sidebar_container = $('<div />', {'class': 'mb-1'}).append($flat_sidebar_checkbox).append('<span>Sidebar nav flat style</span>')
+  var $flat_sidebar_container = $('<div />', {'class': 'mb-1'}).append($flat_sidebar_checkbox).append('<span>Desplegable navegacion plano</span>')
   $container.append($flat_sidebar_container)
 
   var $legacy_sidebar_checkbox = $('<input />', {
@@ -145,7 +145,7 @@
       $('.nav-sidebar').removeClass('nav-legacy')
     }
   })
-  var $legacy_sidebar_container = $('<div />', {'class': 'mb-1'}).append($legacy_sidebar_checkbox).append('<span>Sidebar nav legacy style</span>')
+  var $legacy_sidebar_container = $('<div />', {'class': 'mb-1'}).append($legacy_sidebar_checkbox).append('<span>Desplegable navegacion sin fondo </span>')
   $container.append($legacy_sidebar_container)
 
   var $compact_sidebar_checkbox = $('<input />', {
@@ -160,7 +160,7 @@
       $('.nav-sidebar').removeClass('nav-compact')
     }
   })
-  var $compact_sidebar_container = $('<div />', {'class': 'mb-1'}).append($compact_sidebar_checkbox).append('<span>Sidebar nav compact</span>')
+  var $compact_sidebar_container = $('<div />', {'class': 'mb-1'}).append($compact_sidebar_checkbox).append('<span>Desplegable navegacion conpacto</span>')
   $container.append($compact_sidebar_container)
 
   var $child_indent_sidebar_checkbox = $('<input />', {
@@ -175,7 +175,7 @@
       $('.nav-sidebar').removeClass('nav-child-indent')
     }
   })
-  var $child_indent_sidebar_container = $('<div />', {'class': 'mb-1'}).append($child_indent_sidebar_checkbox).append('<span>Sidebar nav child indent</span>')
+  var $child_indent_sidebar_container = $('<div />', {'class': 'mb-1'}).append($child_indent_sidebar_checkbox).append('<span>Desplegable lateral secundario</span>')
   $container.append($child_indent_sidebar_container)
 
   var $no_expand_sidebar_checkbox = $('<input />', {
@@ -190,7 +190,7 @@
       $('.main-sidebar').removeClass('sidebar-no-expand')
     }
   })
-  var $no_expand_sidebar_container = $('<div />', {'class': 'mb-1'}).append($no_expand_sidebar_checkbox).append('<span>Main Sidebar disable hover/focus auto expand</span>')
+  var $no_expand_sidebar_container = $('<div />', {'class': 'mb-1'}).append($no_expand_sidebar_checkbox).append('<span>Desabilitar barra lateral principal</span>')
   $container.append($no_expand_sidebar_container)
 
   var $text_sm_brand_checkbox = $('<input />', {
@@ -205,10 +205,10 @@
       $('.brand-link').removeClass('text-sm')
     }
   })
-  var $text_sm_brand_container = $('<div />', {'class': 'mb-4'}).append($text_sm_brand_checkbox).append('<span>Brand small text</span>')
+  var $text_sm_brand_container = $('<div />', {'class': 'mb-4'}).append($text_sm_brand_checkbox).append('<span> Variantes Marcas pequeñas</span>')
   $container.append($text_sm_brand_container)
 
-  $container.append('<h6>Navbar Variants</h6>')
+  $container.append('<h6>Navegador colores</h6>')
 
   var $navbar_variants        = $('<div />', {
     'class': 'd-flex'
@@ -308,7 +308,7 @@
     'sidebar-light-olive'
   ]
 
-  $container.append('<h6>Accent Color Variants</h6>')
+  $container.append('<h6>Variante de barra lateral ligera</h6>')
   var $accent_variants = $('<div />', {
     'class': 'd-flex'
   })
@@ -324,7 +324,7 @@
     $body.addClass(accent_class)
   }))
 
-  $container.append('<h6>Dark Sidebar Variants</h6>')
+  $container.append('<h6>Variante barra navegacion lateral</h6>')
   var $sidebar_variants_dark = $('<div />', {
     'class': 'd-flex'
   })
@@ -340,7 +340,7 @@
     $sidebar.addClass(sidebar_class)
   }))
 
-  $container.append('<h6>Light Sidebar Variants</h6>')
+  $container.append('<h6>Variante de barra lateral ligera</h6>')
   var $sidebar_variants_light = $('<div />', {
     'class': 'd-flex'
   })
@@ -357,7 +357,7 @@
   }))
 
   var logo_skins = navbar_all_colors
-  $container.append('<h6>Brand Logo Variants</h6>')
+  $container.append('<h6>Variante logotipo </h6>')
   var $logo_variants = $('<div />', {
     'class': 'd-flex'
   })

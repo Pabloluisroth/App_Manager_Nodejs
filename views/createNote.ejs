@@ -1,0 +1,37 @@
+<%- include("template/header") %>
+<%- include("template/navbar") %>
+<%- include("template/aside") %>
+
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    <%- include('template/breadcrumb', {module: 'Create note'}) %>
+
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-3">
+          <div class="col-md-12">
+            <div class="container">
+                <form action="/saveNote" method="POST">
+                    <div class="mb-3">
+                      <label for="descripcion" class="form-label">Descripcion</label>
+                      <input type="descripcion" class="form-control" id="descripcion" name="descripcion" tabindex="2" required>
+                    </div>
+                    <div class="mb-3">
+                      <label for="date" class="form-label">Fecha</label>
+                      <input type="date" class="form-control" id="date" name="date" tabindex="3" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary" tabindex="4">Submit</button>
+                    <a href="/notes" class="btn btn-secondary">Cancel</a>
+                  </form>            
+            </div>
+          </div>
+        </div>
+      </div><!-- /.container-fluid -->
+    </section>
+
+    <!-- /.content -->
+  </div>
+  <!-- /.content-wrapper -->
+  
+  <%- include("template/footer") %>
