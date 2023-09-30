@@ -1,7 +1,7 @@
 const express = require('express')
 const router = express.Router()
 
-//to invoke the methods for the CRUD of users / tasks / notes
+//to invoke the methods for the CRUD of: users / profile / tasks / notes
 const userController = require('../controllers/userController')
 const authController = require('../controllers/authController')
 const taskController = require('../controllers/taskController')
@@ -171,6 +171,7 @@ router.get('/deleteNote/:id', (req, res) => {
 
 router.post('/saveNote', noteController.saveNote)
 router.post('/updateNote', noteController.updateNote)
+
 
 //router for views
 router.get('/contact', authController.isAuthenticated, (req, res) => {

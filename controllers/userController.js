@@ -8,7 +8,7 @@ exports.saveUser = (req, res) => {
     const rol = req.body.rol
 
     // console.log(email + " - " + name + " - " + rol)
-    conexion.query('INSERT INTO users SET ?', {email:email, name:name, rol:rol}, (error, results) => {
+    conexion.query('INSERT INTO users SET AND SELECT name, email, rol INTO subscriber FROM users ?', {email:email, name:name, rol:rol}, (error, results) => {
         if(error) {
             console.error(error)
             
