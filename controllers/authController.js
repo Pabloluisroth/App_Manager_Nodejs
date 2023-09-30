@@ -14,7 +14,7 @@ exports.register = async (req, res) => {
         let passHash = await bcryptjs.hash(pass, 10)
         //console.log(name + " - " + email + " - " + passHash)
         conexion.query('INSERT INTO users SET ?', {name: name, email: email, pass: passHash}, (error, results) => {
-            if(error) {
+            if(error) {  // crear tabla rol --> subscriptor
                 //console.error(error)
                 res.render('register', {
                     alert: true,

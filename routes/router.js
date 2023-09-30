@@ -73,7 +73,7 @@ router.get('/tasks', authController.isAuthenticated, (req, res) => {
         if(error){
             throw error;
         } else {
-            if (row.rol=="Admin") { 
+            if (row.rol=="Admin", "Subscriber") { 
                 res.render('tasks', { results: results, titleWeb: "List tasks" })
             } else {
                 res.render('index', { userName: row.name, image: row.image, titleWeb: "Control Dashboard"})
