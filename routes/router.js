@@ -1,21 +1,13 @@
 const express = require('express')
 const router = express.Router()
-
-//to invoke the methods for the CRUD of: users / profile / tasks / notes
+const conexion = require('../database/db')
 const userController = require('../controllers/userController')
 const authController = require('../controllers/authController')
 const taskController = require('../controllers/taskController')
 const noteController = require('../controllers/noteController')
-const { Router } = require('express')
 
-//path to send the data in json format
-const { json } = require('express');
-
-//Invoke the database connection
-const conexion = require('../database/db')
 
 /////////////////////////////////////////////////////////////////////////////////////////////> USERS
-
 router.get('/users', authController.isAuthenticated, (req, res) => {  
     conexion.query('SELECT * FROM users', (error, results) => {
         if(error){
@@ -29,7 +21,6 @@ router.get('/users', authController.isAuthenticated, (req, res) => {
         }
     })
 })
-
 router.get('/createUser', authController.isAuthenticated, (req, res) => {
     if (row.rol=="Admin") {        
         res.render('createUser', { titleWeb: "Create user"})
@@ -37,7 +28,6 @@ router.get('/createUser', authController.isAuthenticated, (req, res) => {
         res.render('index', { userName: row.name, image: row.image, titleWeb: "Control Dashboard"})
     }
 })
-
 router.get('/editUser/:id', authController.isAuthenticated, (req, res) => {
     const id = req.params.id;
     conexion.query('SELECT * FROM users WHERE id= ?', [id], (error, results) => {
@@ -52,7 +42,6 @@ router.get('/editUser/:id', authController.isAuthenticated, (req, res) => {
         }
     })
 })
-
 router.get('/deleteUser/:id', (req, res) => {
     const id = req.params.id
     conexion.query('DELETE FROM users WHERE id= ?', [id], (error, results) => {
@@ -63,17 +52,14 @@ router.get('/deleteUser/:id', (req, res) => {
         }
     })
 });
-router.post('/saveUser', userController.saveUser)
-router.post('/updateUser', userController.updateUser)
 
 /////////////////////////////////////////////////////////////////////////////////////////////> TASKS
-
 router.get('/tasks', authController.isAuthenticated, (req, res) => {
     conexion.query('SELECT * FROM tasks', (error, results) => {
         if(error){
             throw error;
         } else {
-            if (row.rol=="Admin", "Subscriber") { 
+            if (row.rol=="Admin") { // pasar mas roles
                 res.render('tasks', { results: results, titleWeb: "List tasks" })
             } else {
                 res.render('index', { userName: row.name, image: row.image, titleWeb: "Control Dashboard"})
@@ -81,7 +67,6 @@ router.get('/tasks', authController.isAuthenticated, (req, res) => {
         }
     })
 })
-
 router.get('/createTask', authController.isAuthenticated, (req, res) => {
     if (row.rol=="Admin") {        
         res.render('createTask', { titleWeb: "Create task"})
@@ -89,7 +74,6 @@ router.get('/createTask', authController.isAuthenticated, (req, res) => {
         res.render('index', { userName: row.name, image: row.image, titleWeb: "Control Dashboard"})
     }
 })
-
 router.get('/editTask/:id', authController.isAuthenticated, (req, res) => {
     const id = req.params.id;
     conexion.query('SELECT * FROM tasks WHERE id= ?', [id], (error, results) => {
@@ -97,14 +81,13 @@ router.get('/editTask/:id', authController.isAuthenticated, (req, res) => {
             throw error;
         } else {
             if(row.rol=="Admin") {
-                res.render('editTask', { user: results[0], titleWeb: "Edit task" })
+                res.render('editTask', { task: results[0], titleWeb: "Edit task" })
             } else {
                 res.render('index', { userName: row.name, image: row.image, titleWeb: "Control Dashboard"})
             }
         }
     })
 })
-
 router.get('/deleteTask/:id', (req, res) => {
     const id = req.params.id
     conexion.query('DELETE FROM tasks WHERE id= ?', [id], (error, results) => {
@@ -116,9 +99,6 @@ router.get('/deleteTask/:id', (req, res) => {
     })
 });
 
-router.post('/saveTask', taskController.saveTask)
-router.post('/updateTask', taskController.updateTask)
-
 /////////////////////////////////////////////////////////////////////////////////////////////> NOTES
 
 router.get('/notes', authController.isAuthenticated, (req, res) => {  
@@ -126,7 +106,7 @@ router.get('/notes', authController.isAuthenticated, (req, res) => {
         if(error){
             throw error;
         } else {
-            if (row.rol=="Admin" , "Subscriber") { 
+            if (row.rol=="Admin") { 
                 res.render('notes', { results: results, titleWeb: "List notes" })
             } else {
                 res.render('index', { userName: row.name, image: row.image, titleWeb: "Control Dashboard"})
@@ -134,14 +114,14 @@ router.get('/notes', authController.isAuthenticated, (req, res) => {
         }
     })
 })
-
 router.get('/createNote', authController.isAuthenticated, (req, res) => {
-    if (row.rol=="Admin" , "Subscriber") {        
+    if (row.rol=="Admin") {        
         res.render('createNote', { titleWeb: "Create note"})
     } else {
         res.render('index', { userName: row.name, image: row.image, titleWeb: "Control Dashboard"})
     }
 })
+
 
 router.get('/editNote/:id', authController.isAuthenticated, (req, res) => {
     const id = req.params.id;
@@ -149,8 +129,8 @@ router.get('/editNote/:id', authController.isAuthenticated, (req, res) => {
         if(error){
             throw error;
         } else {
-            if(row.rol=="Admin" , "Subscriber") {
-                res.render('editNote', { user: results[0], titleWeb: "Edit note" })
+            if(row.rol=="Admin") { 
+                res.render('editNote', { note: results[0], titleWeb: "Edit note" })
             } else {
                 res.render('index', { userName: row.name, image: row.image, titleWeb: "Control Dashboard"})
             }
@@ -169,36 +149,35 @@ router.get('/deleteNote/:id', (req, res) => {
     })
 });
 
+/////////////////////////////////////////////////////////////////////////////////////> SAVE - UPDATE CRUD 
 router.post('/saveNote', noteController.saveNote)
 router.post('/updateNote', noteController.updateNote)
+router.post('/saveTask', taskController.saveTask)
+router.post('/updateTask', taskController.updateTask)
+router.post('/saveUser', userController.saveUser)
+router.post('/updateUser', userController.updateUser)
 
-
-//router for views
-router.get('/contact', authController.isAuthenticated, (req, res) => {
-    res.render('contact', { userName: row.name, image: row.image, titleWeb: "Control Contact"})
-})
+/////////////////////////////////////////////////////////////////////////////////////> VIEWS
 
 router.get('/', authController.isAuthenticated, (req, res) => {
     res.render('index', { userName: row.name, image: row.image, titleWeb: "Control Dashboard"})
 })
 
+router.get('/contact', authController.isAuthenticated, (req, res) => {
+    res.render('contact', { userName: row.name, image: row.image, titleWeb: "Control Contact"})
+})
+
 router.get('/logout', authController.logout)
-
-router.get('/login', (req, res) => {
-    res.render('login', { alert:false })
-})
-
-router.get('/register', (req, res) => {
-    res.render('register', { alert:false })
-})
+router.get('/login', (req, res) => { res.render('login', { alert:false })})
+router.get('/register', (req, res) => { res.render('register', { alert:false })})
 
 router.post('/register', authController.register)
 router.post('/login', authController.login)
 
+
 router.post('/upload/:id', (req, res) => {
     const id = req.params.id
     const image = req.file.filename
-
     conexion.query('UPDATE users SET ? WHERE id= ?', [{image:image}, id], (error, results) => {
         if(error){
             console.error(error);
