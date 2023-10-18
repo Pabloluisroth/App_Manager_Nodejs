@@ -1,0 +1,51 @@
+<%- include("template/header") %>
+<%- include("template/navbar") %>
+<%- include("template/aside") %>
+
+  <div class="content-wrapper">
+    <%- include('template/breadcrumb', {module: 'Profile'}) %>
+    <section class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-md-12">            
+            <div class="container">
+              <table id="example1" class="table table-bordered table-striped text-center mt-4">
+                <thead>
+                  <tr class="bg-primary text-white">
+                    <th scope="col">Image</th>
+                    <th scope="col">#ID</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Rol</th>
+                    <th scope="col">Phone</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Location</th>
+                    <th scope="col">Actions</th> 
+                  </tr>
+                </thead>
+                <tbody>
+                  <% results.forEach ((profile) => { %>
+                    <tr>
+                      <th>
+                          <img src="./../uploads/<%= profile.image %>" class="image img-circle elevation-2" alt="Image User">
+                      </th>
+                      <th><%= profile.id %></th>
+                      <th><%= profile.name %></th>
+                      <th><%= profile.rol %></th>
+                      <th><%= profile.phone %></th>
+                      <th><%= profile.email %></th>
+                      <th><%= profile.location %></th>
+                      <td>
+                        <a href="/editProfile/<%= profile.id %>" class="btn btn-info"> <i class="fa-regular fa-pen-to-square"></i></a>
+                      </td>
+                    </tr>                              
+                  <% }) %>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+  <%- include("template/footer") %>

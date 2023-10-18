@@ -28,7 +28,13 @@
                       <th><%= note.id %></th>
                       <th><%= note.descripcion %></th>
                       <th><%= note.date %></th>
-                      <td><!-- acciones -->
+                      <td>
+
+                       <!--
+                          <a href="/editNote/<%= note.id %>" onclick="confirmation(<%= note.id %>);" class="btn btn-danger"> <i class="fa-regular fa-trash-can"></i></a>  
+                          <a href="/deletedNote/<%= note.id %>" onclick="confirmation(<%= note.id %>);" class="btn btn-danger"> <i class="fa-regular fa-trash-can"></i></a>              
+                        -->
+
                         <a href="/editNote/<%= note.id %>" class="btn btn-info"> <i class="fa-regular fa-pen-to-square"></i></a>
                         <a onclick="confirmation(<%= note.id %>);" class="btn btn-danger"> <i class="fa-regular fa-trash-can"></i></a>              
                       </td>

@@ -33,11 +33,9 @@
         </div>
         <div class="info">
           <a class="d-block"> <%= userName %></a>
-     
         </div>
       </div>
       <% } %>
-
 
       <!-- Sidebar Menu -->
       <nav class="mt-2">
@@ -45,25 +43,84 @@
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->         
           <li class="nav-header">Gestionar</li>
+
           <li class="nav-item">
-            <a href="/users" class="nav-link">              
+            <a href="#" class="nav-link">
               <i class="nav-icon fas fa-solid fa-users"></i>
+              <span class="badge badge-secondary right"></span>
               <p>
-                Usuarios                
+                Usuarios
+                <i class="fas fa-angle-left right"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="/users" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Creados</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="/usersBanned" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Baneados</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+
+          <li class="nav-item">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-columns"></i>
+              <span class="badge badge-secondary right"></span>
+              <p>
+                Tareas
+                <i class="fas fa-angle-left right"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="/tasks" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Creadas</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="/taskAsignated" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Asignadas</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="/taskCompleted" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Completadas</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+
+          <li class="nav-item">
+            <a href="/events" class="nav-link">              
+              <i class="nav-icon fa fa fa-calendar"></i><!--fa fa w2schools-->
+              <p>
+                Eventos              
               </p>
             </a>
           </li>
-          <li class="nav-item">
-            <a href="/tasks" class="nav-link">              
-              <i class="nav-icon fas fa-columns"></i><!--fa fa w2schools-->
-              <p>
-                Tareas                
-              </p>
-            </a>
-          </li> 
+
+
           
           <li class="nav-header">Utilidades</li>
 
+          <li class="nav-item">
+            <a href="/agends" class="nav-link">              
+              <i class="nav-icon fa fa-address-book"></i><!--fa fa w2schools-->
+              <p>
+                Agenda              
+              </p>
+            </a>
+          </li> 
           <li class="nav-item">
             <a href="/notes" class="nav-link">              
               <i class="nav-icon fas fa-edit"></i><!--fa fa w2schools-->
@@ -76,12 +133,19 @@
           <li class="nav-header">Sesión</li>  
         
           </li> <!--///////////////////////////////////////////////////////-->
-
+          <li class="nav-item">
+            <a href="/profiles" class="nav-link">
+              <i class="nav-icon fas fa-solid fa fa-user"></i>
+              <p>
+                My Perfil
+              </p>
+            </a>
+          </li>
           <li class="nav-item">
             <a href="/logout" class="nav-link">
               <i class="nav-icon fas fa-solid fa-arrow-right-from-bracket"></i>
               <p>
-                Cerrar sesión
+                Terminar sesión
               </p>
             </a>
           </li>

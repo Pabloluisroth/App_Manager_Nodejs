@@ -1,0 +1,94 @@
+<%- include("template/header") %>
+<%- include("template/navbar") %>
+<%- include("template/aside") %> 
+
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    <%- include('template/breadcrumb', {module: 'Edit Profile'}) %>
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-md-12">
+            <% if (profile) { %>
+          
+              <div class="container">   
+                <div class="row">
+                  <div class="col-md-6">
+                    <form action="/updateProfile" method="POST">
+                      <input hidden id="id" name="id" value="<%= profile.id %>">
+
+                      <div class="mb-3">
+                        <label for="name" class="form-label">Name</label>
+                        <input type="text" class="form-control" id="name" name="name" value="<%= profile.name %>" tabindex="3" autofocus>              
+                      </div>
+
+                      <div class="mb-3">
+                        <select id="rol" name="rol" class="form-select" tabindex="4">
+                          <option <%= profile.rol='Admin' ? 'selected' : '' %> value="Admin">Admin</option>
+                          <option <%= profile.rol='Subscriber' ? 'selected' : '' %> value="Subscriber">Subscriber</option>
+                        </select>
+                      </div>
+
+                      <div class="mb-3">
+                        <label for="phone" class="form-label">Phone</label>
+                        <input type="phone" class="form-control" id="phone" name="phone" value="<%= profile.phone %>" tabindex="5">
+                      </div>
+
+                      <div class="mb-3">
+                        <label for="email" class="form-label">Email</label>
+                        <input type="email" class="form-control" id="email" name="email" value="<%= profile.email %>" tabindex="6">
+                      </div>
+
+                      <div class="mb-3">
+                        <select id="location" name="location" class="form-select" tabindex="7">
+                          <option <%= profile.location='Sevilla' ? 'selected' : '' %> value="Sevilla">Sevilla</option>
+                          <option <%= profile.location='Huelva' ? 'selected' : '' %> value="Huelva">Huelva</option>
+                          <option <%= profile.location='Cadiz' ? 'selected' : '' %> value="Cadiz">Cadiz</option>
+                          <option <%= profile.location='Granada' ? 'selected' : '' %> value="Granada">Granada</option>
+                          <option <%= profile.location='Malaga' ? 'selected' : '' %> value="Malaga">Malaga</option>
+                          <option <%= profile.location='Cordoba' ? 'selected' : '' %> value="Cordoba">Cordoba</option>
+                          <option <%= profile.location='Jaen' ? 'selected' : '' %> value="Jaen">Jaen</option>
+                          <option <%= profile.location='Almeria' ? 'selected' : '' %> value="Almeria">Almeria</option>
+                        </select>
+                      </div>
+
+                      <button type="submit" class="btn btn-primary" tabindex="6">Submit</button>
+                      <a href="/profiles" class="btn btn-secondary">Cancel</a>
+                    </form>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="row">
+                      <div class="col-sm-9">
+                        <div class="form-group">
+                          <% if(profile.image) { %>
+                            <img src="../uploads/<%= profile.image %>" alt="<%= profile.image %>" width="70px" height="70px">
+                          <% } %>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-sm-12">
+                        <form action="/upload/<%= profile.id %>" method="POST" enctype="multipart/form-data">
+                          <input type="file" name="image" class="btn btn-secondary" required>
+                          <button type="submit" class="btn btn-primary">
+                            Upload
+                          </button>
+                        </form>
+                      </div>
+                    </div>
+                  </div>   
+                </div>  
+              </div>
+          
+          <% } %>
+          </div>
+        </div>
+      </div><!-- /.container-fluid -->
+    </section>
+
+    <!-- /.content -->
+  </div>
+  <!-- /.content-wrapper -->
+  
+  <%- include("template/footer") %>

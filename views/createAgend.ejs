@@ -1,0 +1,71 @@
+<%- include("template/header") %>
+<%- include("template/navbar") %>
+<%- include("template/aside") %>
+
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    <%- include('template/breadcrumb', {module: 'Create agend'}) %>
+
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-md-12">
+           
+            <div class="container">              
+                <form action="/saveAgend" method="POST">
+
+                  <div class="mb-3">
+                    <label for="id_user" class="form-label">Usuario</label>
+                    <input type="text" class="form-control" id="id_user" name="id_user" tabindex="1" autofocus>            
+                  </div>
+
+                    <div class="mb-3">
+                      <label for="name_user" class="form-label">Name</label>
+                      <input type="text" class="form-control" id="name_user" name="name_user" tabindex="3" autofocus>              
+                    </div>
+
+                    <div class="mb-3">
+                      <select id="rol_user" name="rol_user" class="form-select" tabindex="4">
+                        <option value="Admin" selected>Admin</option>
+                        <option value="Subscriber">Subscriber</option>
+                      </select>
+                    </div>
+
+                    <div class="mb-3">
+                      <label for="phone" class="form-label">Phone</label>
+                      <input type="phone" class="form-control" id="phone" name="phone" tabindex="5">
+                    </div>
+
+                    <div class="mb-3">
+                      <label for="email_user" class="form-label">Email</label>
+                      <input type="email_user" class="form-control" id="email_user" name="email_user" tabindex="6">
+                    </div>
+
+                    <div class="mb-3">
+                      <select id="location" name="location" class="form-select" tabindex="7">
+                        <option value="Andalucia" selected>selected</option>
+                        <option value="Sevilla">Sevilla</option><!-- sevilla prefefinido en bd -->
+                        <option value="Huelva">Huelva</option>
+                        <option value="Cadiz">Cadiz</option>
+                        <option value="Granada">Granada</option>
+                        <option value="Malaga">Malaga</option>
+                        <option value="Jaen">Jaen</option>
+                        <option value="Almeria">Almeria</option>
+                      </select>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary" tabindex="8">Submit</button>
+                    <a href="/agends" class="btn btn-secondary">Cancel</a>
+                  </form>            
+            </div>
+          </div>
+        </div>
+      </div><!-- /.container-fluid -->
+    </section>
+
+    <!-- /.content -->
+  </div>
+  <!-- /.content-wrapper -->
+  
+  <%- include("template/footer") %>

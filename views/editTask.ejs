@@ -18,20 +18,33 @@
                         <label for="titulo" class="form-label">titulo</label>
                         <input type="text" class="form-control" id="titulo" name="titulo" value="<%= task.titulo %>" tabindex="2" required>
                       </div>
+
                       <div class="mb-3">
                         <label for="descripcion" class="form-label">Descripcion</label>
                         <input type="text" class="form-control" id="descripcion" name="descripcion" value="<%= task.descripcion %>" tabindex="3" required>
                       </div>
 
                       <div class="mb-3">
-                        <label for="vencimiento" class="form-label">Vencimiento</label>
-                        <input type="date" class="form-control" id="vencimiento" name="vencimiento" value="<%= task.vencimiento %>" tabindex="4" required>
+                        <label for="sumario" class="form-label">Sumario</label>
+                        <input type="text" class="form-control" id="sumario" name="sumario" value="<%= task.sumario %>" tabindex="4" required>
                       </div>
 
+                      <div class="mb-3">
+                        <label for="asignada" class="form-label">Asigned</label>
+                        <input type="text" class="form-control" id="asignada" name="asignada" value="<%= task.asignada %>" tabindex="5" required>
+                      </div>
 
+                      <div class="mb-3">
+                        <label for="vencimiento" class="form-label">Vencimiento</label>
+                        <input type="date" class="form-control" id="vencimiento" name="vencimiento" value="<%= task.vencimiento %>" tabindex="6" required>
+                      </div>
 
+                      <div class="mb-3">
+                        <label for="estado" class="form-label">Estado</label>
+                        <input type="text" class="form-control" id="estado" name="estado" value="<%= task.estado %>" tabindex="7" required>
+                      </div>
 
-                      <button type="submit" class="btn btn-primary" tabindex="5">Submit</button> <!-- antes 4 -->
+                      <button type="submit" class="btn btn-primary" tabindex="8">Submit</button> <!-- antes 4 -->
                       <a href="/tasks" class="btn btn-secondary">Cancel</a>
                     </form>
               </div>

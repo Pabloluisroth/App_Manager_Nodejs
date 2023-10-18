@@ -1,14 +1,16 @@
 //invoke the DB connection
 const conexion = require('../database/db')
 
-//procedure to save
-
+/**
+ * @param procedure to create or save user 
+ */
 exports.saveUser = (req, res) => {
     const email = req.body.email
     const name = req.body.name
     const rol = req.body.rol
-
-    conexion.query('INSERT INTO users SET ?', {email:email, name:name, rol:rol}, (error, results) => {
+    const since = req.body.since
+    let insert= `INSERT INTO users SET ?; `;
+    conexion.query(insert, {email:email, name:name, rol:rol, since:since}, (error, results) => {
         if(error) {
             console.error(error)
             
@@ -19,15 +21,17 @@ exports.saveUser = (req, res) => {
     
 };
 
-
-//procedure to update
+/**
+ * @param procedure to update user set
+ */
 exports.updateUser = (req, res) => {
     const id = req.body.id
     const name = req.body.name
     const email = req.body.email
     const rol = req.body.rol
-
-    conexion.query('UPDATE users SET ? WHERE id = ?', [{ name:name, email:email, rol:rol}, id ], (error, results) => {
+    const since = req.body.since
+    let update = `UPDATE users SET ? WHERE id = ? `;
+    conexion.query(update, [{ name:name, email:email, rol:rol, since:since}, id ], (error, results) => {
         if(error) {
             console.error(error)
         } else {
@@ -35,3 +39,35 @@ exports.updateUser = (req, res) => {
         }
     })
 }
+
+/**
+ * @param procedure to ban for users
+ */
+exports.bansUser = (req, res) => {
+    const id = req.body.id
+    let bans= `UPDATE users SET bans = true WHERE id= ? `;
+    conexion.query(bans, [ id ], (error, results) => {
+        if(error) {
+            console.error(error)
+        } else {
+            res.redirect('/users');
+        }
+    })
+}
+
+/**
+ * @param procedure to revert bans for users
+ */
+exports.revertBansUser = (req, res) => {
+    const id = req.body.id
+    let revertBans = `UPDATE users SET bans = false WHERE id= ? `;
+    conexion.query(revertBans, [ id ], (error, results) => {
+        if(error) {
+            console.error(error)
+        } else {
+            res.redirect('/users');
+        }
+    })
+}
+
+

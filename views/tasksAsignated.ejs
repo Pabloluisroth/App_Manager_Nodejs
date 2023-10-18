@@ -4,20 +4,20 @@
 
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
-    <%- include('template/breadcrumb', {module: 'Tasks'}) %>
+    <%- include('template/breadcrumb', {module: 'Tasks Asignated'}) %>
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-md-12">            
             <div class="container">
-              <a href="/createTask" class="btn btn-primary mt-4 mb-2"> <i class="fa-regular fa-square-plus"></i></a>
               <table id="example1" class="table table-bordered table-striped text-center mt-4">
                 <thead>
                   <tr class="bg-primary text-white">
                     <th scope="col">#ID</th>
                     <th scope="col">Titulo</th> 
-                    <th scope="col">Vencimiento</th> <!-- crear asignar nota a persona-->
+                    <th scope="col">Vencimiento</th> 
+                    <th scope="col">Asignada</th>
                     <th scope="col">Acciones</th> 
                   </tr>
                 </thead>
@@ -28,17 +28,20 @@
                       <th><%= task.id %></th>
                       <th><%= task.titulo%></th>
                       <th><%= task.vencimiento %></th>
+                      <th><%= task.asignada %></th>
                       <td>
+                        
+                      
+                      
+
                         <a href="/taskDetails/<%= task.id %>" class="btn btn-warning "> <i class=" fa fa-info-circle"></i></a>
-                        <a href="/editTask/<%= task.id %>" class="btn btn-info"> <i class="fa-regular fa-pen-to-square"></i></a>
-<!--
-                        <a href="//<%= task.id %> onclick="confirmationAsignedTask(<%= task.estado %>);" class="btn btn-secondary"> <i class="fa fa-paper-plane"></i></a> 
-                        <a href="//<%= task.id %> onclick="confirmationTerminatedTask(<%= task.estado %>);" class="btn btn-primary"> <i class="fa fa-hourglass-end"></i></a> 
-                        <a href="//<%= task.id %> onclick="confirmation(<%= task.id %>);" class="btn btn-danger"> <i class="fa-regular fa-trash-can"></i></a> 
--->
-                        <a onclick="confirmationAsignedTask(<%= task.estado %>);" class="btn btn-secondary"> <i class="fa fa-paper-plane"></i></a> 
-                        <a onclick="confirmationTerminatedTask(<%= task.estado %>);" class="btn btn-primary"> <i class="fa fa-hourglass-end"></i></a> 
-                        <a onclick="confirmation(<%= task.id %>);" class="btn btn-danger"> <i class="fa-regular fa-trash-can"></i></a> 
+                        <!-- <a href="/ /<%= task.id %>" onclick="confirmationAsignedTask(<%= task.id %>);"class="btn btn-secondary"> <i class="fa fa-eraser"></i></a>  -->
+                        <!-- <a href="/ /<%= task.id %>" onclick="confirmationTerminatedTask(<%= task.id %>);"class="btn btn-primary"> <i class="fa fa-hourglass-end"></i></a>  -->
+                        
+                        <!-- CREAR Y PASAR EL CONTROLADOR; DESPUES MODIFICAR ROUTER-->
+                        
+                        <a onclick="confirmationAsignedTask(<%= task.id %>);" class="btn btn-secondary"> <i class="fa fa-eraser"></i></a> 
+                        <a onclick="confirmationTerminatedTask(<%= task.id %>);" class="btn btn-primary"> <i class="fa fa-hourglass-end"></i></a> 
                         
                       </td>
                     </tr>                              
@@ -49,6 +52,8 @@
           </div>
         </div>
       </div><!-- /.container-fluid -->
+
+
     </section>
 
     <!-- /.content -->

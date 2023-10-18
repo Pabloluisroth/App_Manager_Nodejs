@@ -4,7 +4,7 @@
 
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
-    <%- include('template/breadcrumb', {module: 'Tasks'}) %>
+    <%- include('template/breadcrumb', {module: 'Tasks Asigned'}) %>
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <div class="container-fluid">
@@ -31,15 +31,21 @@
                       <td>
                         <a href="/taskDetails/<%= task.id %>" class="btn btn-warning "> <i class=" fa fa-info-circle"></i></a>
                         <a href="/editTask/<%= task.id %>" class="btn btn-info"> <i class="fa-regular fa-pen-to-square"></i></a>
-<!--
-                        <a href="//<%= task.id %> onclick="confirmationAsignedTask(<%= task.estado %>);" class="btn btn-secondary"> <i class="fa fa-paper-plane"></i></a> 
-                        <a href="//<%= task.id %> onclick="confirmationTerminatedTask(<%= task.estado %>);" class="btn btn-primary"> <i class="fa fa-hourglass-end"></i></a> 
-                        <a href="//<%= task.id %> onclick="confirmation(<%= task.id %>);" class="btn btn-danger"> <i class="fa-regular fa-trash-can"></i></a> 
--->
+
+                        <!--
+
+                           <a href="/taskDetails/<%= task.id %>" onclick="confirmationAsignedTask(<%= task.id %>);" class="btn btn-secondary"> <i class="fa fa-paper-plane"></i></a> 
+                           <a href="/taskDetails/<%= task.id %>" onclick="confirmationTerminatedTask(<%= task.id %>);" class="btn btn-primary"> <i class="fa fa-hourglass-end"></i></a> 
+                           <a href="/taskDetails/<%= task.id %>" onclick="confirmation(<%= task.id %>);" class="btn btn-danger"> <i class="fa-regular fa-trash-can"></i></a> 
+                        -->
+
                         <a onclick="confirmationAsignedTask(<%= task.estado %>);" class="btn btn-secondary"> <i class="fa fa-paper-plane"></i></a> 
                         <a onclick="confirmationTerminatedTask(<%= task.estado %>);" class="btn btn-primary"> <i class="fa fa-hourglass-end"></i></a> 
                         <a onclick="confirmation(<%= task.id %>);" class="btn btn-danger"> <i class="fa-regular fa-trash-can"></i></a> 
                         
+
+
+
                       </td>
                     </tr>                              
                   <% }) %>
