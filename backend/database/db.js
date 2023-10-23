@@ -32,6 +32,10 @@ conexion.connect ((error) => {
         id int primary key auto_increment,
         descripcion varchar(100) not null unique key,
         date TIMESTAMP DEFAULT CURRENT_TIMESTAMP); `; 
+
+        // profiles
+
+        // agends
     
         conexion.query(consultas,[1, 2, 3], function(err, results, fields) {
         if (err) {

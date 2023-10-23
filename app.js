@@ -38,9 +38,7 @@ app.use(express.urlencoded({extended:false}))
 app.use(cookieParser())
 
 // import the router
-app.use('/', require('./routes/router'))
-
-
+app.use('/', require('./backend/routes/routes'))
 app.use(express.static(path.join(__dirname, '/public')))
 
 const PORT = process.env.PORT || 3000
