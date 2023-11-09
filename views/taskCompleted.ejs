@@ -28,13 +28,8 @@
                       <th><%= task.titulo%></th>
                       <th><%= task.estado%></th>
                       <td>
-                        <!--
-
                         <a href="//<%= task.id %>" onclick="confirmationRevertTask(<%= taks.id %>);" class="btn btn-info"> <i class=" fa fa-eraser"></i></a>               
                         <a href="//<%= task.id %>" onclick="confirmation(<%= task.id %>);" class="btn btn-danger"> <i class="fa-regular fa-trash-can"></i></a> 
-                        -->
-                        <a onclick="confirmationRevertTask(<%= taks.id %>);" class="btn btn-info"> <i class=" fa fa-eraser"></i></a>               
-                        <a onclick="confirmation(<%= task.id %>);" class="btn btn-danger"> <i class="fa-regular fa-trash-can"></i></a> 
                       </td>
                     </tr>                              
                   <% }) %>
@@ -49,5 +44,6 @@
     <!-- /.content -->
   </div>
   <!-- /.content-wrapper -->
-  
+  <%- include("template/alert") %> <!-- sweetAlert2 -->
+  <%- include("template/error") %>
   <%- include("template/footer") %>

@@ -2,11 +2,10 @@ const express = require('express')
 const app = express()
 const path = require('path')
 const dotenv = require('dotenv')
+dotenv.config({path: './backend/env/.env'})
 const cookieParser = require('cookie-parser')
 const { json } = require('express')
 const multer = require('multer')
-
-app.set('view engine', 'ejs')
 
 //middlewares
 const storage = multer.diskStorage({
@@ -31,13 +30,9 @@ app.use(multer({
     }
 }).single('image'));
 
-dotenv.config({path: './env/.env'})
-
+app.set('view engine', 'ejs')
 app.use(express.urlencoded({extended:false}))
-//app.use(express(json))
 app.use(cookieParser())
-
-// import the router
 app.use('/', require('./backend/routes/routes'))
 app.use(express.static(path.join(__dirname, '/public')))
 

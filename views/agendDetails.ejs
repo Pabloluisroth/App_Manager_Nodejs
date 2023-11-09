@@ -2,10 +2,8 @@
 <%- include("template/navbar") %>
 <%- include("template/aside") %>
 
-  <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
     <%- include('template/breadcrumb', {module: 'Agend details'}) %>
-    <!-- Content Header (Page header) -->
     <section class="content-header">
       <div class="container-fluid">
         <div class="row mb-2">
@@ -28,13 +26,10 @@
                 </thead>
                 <tbody>
                   <% results.forEach ((agend) => { %>
-        
                     <tr>
                       <th><%= agend.id %></th>
                       <th>
-
                           <img src="./../uploads/<%= agend.image %>" class="image img-circle elevation-2" width="70px" alt="Image User">
-                        
                       </th>
                       <th><%= agend.name %></th>
                       <th><%= agend.lastname %></th>
@@ -44,7 +39,6 @@
                       <th><%= agend.location %></th>
                       <th><%= agend.province %></th>
                       <th><%= agend.address %></th>
-                    
                     </tr>                              
                   <% }) %>
                 </tbody>
@@ -52,11 +46,8 @@
             </div>
           </div>
         </div>
-      </div><!-- /.container-fluid -->
+      </div>
     </section>
-
-    <!-- /.content -->
+    <%- include("template/alert") %>
+    <%- include("template/footer") %>
   </div>
-  <!-- /.content-wrapper -->
-  
-  <%- include("template/footer") %>

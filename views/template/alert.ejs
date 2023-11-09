@@ -1,0 +1,136 @@
+
+  <aside class="control-sidebar control-sidebar-dark">
+  </aside>
+
+</div>
+<script src="./../js/jquery.min.js"></script>
+<script src="./../js/bootstrap.bundle.min.js"></script>
+<script src="./../js/jquery.dataTables.min.js"></script>
+<script src="./../js/dataTables.bootstrap4.min.js"></script>
+<script src="./../js/dataTables.responsive.min.js"></script>
+<script src="./../js/responsive.bootstrap4.min.js"></script>
+<script src="./../js/dataTables.buttons.min.js"></script>
+<script src="./../js/buttons.bootstrap4.min.js"></script>
+<script src="./../js/jszip.min.js"></script>
+<script src="./../js/pdfmake.min.js"></script>
+<script src="./../js/vfs_fonts.js"></script>
+<script src="./../js/buttons.html5.min.js"></script>
+<script src="./../js/buttons.print.min.js"></script>
+<script src="./../js/buttons.colVis.min.js"></script>
+<script src="./../js/adminlte.min.js"></script>
+<script src="./../js/demo.js"></script>
+
+<script>
+  $(function () {
+    $("#example1").DataTable({
+      "responsive": true, "lengthChange": false, "autoWidth": false,
+      "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
+    }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+    $('#example2').DataTable({
+      "paging": true,
+      "lengthChange": false,
+      "searching": false,
+      "ordering": true,
+      "info": true,
+      "autoWidth": true,
+      "responsive": true,
+    });
+  });
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.17/dist/sweetalert2.all.min.js"></script>
+<script src="https://www.gustabin.com/store/assets/js/jquery.maskedinput.js"></script>
+
+<script>
+  $(document).ready(function () {
+      $('#tableUsers').DataTable();
+      $('#tableProfile').DataTable();
+      $('#tableTasks').DataTable();
+      $('#tableNotes').DataTable();
+      $('#tableAgends').DataTable();
+      $('#tableTaskCompleted').DataTable();
+  }); 
+
+  function confirmation_deleted(id){
+    Swal.fire({
+      title: 'Are you sure you want to delete the record ' + id + ' ?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Confirm'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        window.location = '/deleteUser/' + id;
+        window.location = '/deleteTask/' + id;
+        window.location = '/deleteNote/' + id;
+        window.location = '/deleteAgend/' + id;
+        window.location = '/deleteProfile/' + id;
+        window.location = '/deleteAssign/' + id;
+      }
+    })
+  }
+
+  function confirmation_BanUser(id){ // banear usuario
+    Swal.fire({
+      title: 'Are you sure you want to ban the user with record ' + id + ' ?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Confirm'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        window.location = '/bansUser/' + id;
+      }
+    })
+  }
+ 
+  function confirmation_undoUserBan(id){ // deshacer baneo a usuario 
+    Swal.fire({
+      title: 'Are you sure you want to remove ban the user ban with record ' + id + ' ?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Confirm'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        window.location = '/revertBansUser/' + id;
+      }
+    })
+  }
+
+  function confirmation_undoFinishTask(id){ // deshacer terminar tarea
+    Swal.fire({
+      title: 'Are you sure you want to return this task to the lis with record ' + id + ' ?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Confirm'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        window.location = '/returnTask/' + id;
+      }
+    })
+  }
+
+  function confirmation_TerminatedTask(id){ // swetAlert2 --> show modal --> terminar tarea
+    Swal.fire({
+      title: 'Are you sure you want to finish this task ' + id + ' ?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Confirm'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        window.location = '/completedTask/' + id;
+      }
+    })
+  }
+
+</script>
+</body>
+</html>

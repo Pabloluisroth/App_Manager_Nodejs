@@ -1,0 +1,45 @@
+<%- include("template/header") %>
+<%- include("template/navbar") %>
+<%- include("template/aside") %>
+
+<div class="content-wrapper">
+    <%- include('template/breadcrumb', {module: 'Assigned task list '}) %>
+    <section class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+        <div class="col-md-12">            
+            <div class="container">
+            <table id="example1" class="table table-bordered table-striped text-center mt-4">
+                <thead>
+                <tr class="bg-primary text-white">
+                    <!-- <th scope="col">#ID</th> -->
+                    <th scope="col">User Nº</th>
+                    <th scope="col">Task Nº</th>
+                    <th scope="col">Date of assignment</th>
+                    <th scope="col">Actions</th> 
+
+                </tr>
+                </thead>
+                <tbody>
+                <% results.forEach ((asigned) => { %>
+                <tr>
+                    <!-- <th><%= asigned.id %></th> -->
+                    <th><%= asigned.userId %></th>
+                    <th><%= asigned.taskId%></th>
+                    <th><%= asigned.dateAsigned %></th>
+                    <td>
+                        <a href="/editAssign/<%= asigned.id %>" class="btn btn-info"> <i class="fa-regular fa-pen-to-square"></i></a>
+                        <a href="/deleteAssign/<%= asigned.id %>" onclick="confirmation_delete(<%= asigned.id %>);" class="btn btn-danger"> <i class="fa-regular fa-trash-can"></i></a> 
+                    </td>
+                </tr>                              
+                <% }) %>
+                </tbody>
+            </table>
+            </div>
+        </div>
+        </div>
+    </div>
+    </section>
+    <%- include("template/alert") %>
+    <%- include("template/footer") %>
+</div>

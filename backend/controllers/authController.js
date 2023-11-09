@@ -15,11 +15,8 @@ exports.register = async (req, res) => {
         //console.log(name + " - " + email + " - " + passHash)
         conexion.query('INSERT INTO users SET ?', {name: name, email: email, pass: passHash}, (error, results) => {
             if(error) {  // crear tabla rol --> subscriptor
-                //console.error(error)
-                res.render('register', {
-                    alert: true,
-                    alertMessage: 'This email already exists'
-                })
+                //console.error('Error en la consulta a la base de datos:', error)
+                res.render('register', {alert:true, alertMessage: 'This email already exists'})
             } else {   
                 
                 //create email body
@@ -56,10 +53,9 @@ exports.register = async (req, res) => {
             }
         }) 
     } catch (error) {
-        console.error(error)
+        console.error('Error en la consulta a la base de datos:', error)
     }
 }
-
 
 //procedure to login
 exports.login = async (req, res)=>{
@@ -112,7 +108,7 @@ exports.login = async (req, res)=>{
             })
         }
     } catch (error) {
-        console.log(error)
+        console.error('Error en la consulta a la base de datos:', error)
     }
 }
 

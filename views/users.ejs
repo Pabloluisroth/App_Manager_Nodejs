@@ -34,17 +34,8 @@
                       <th><%= user.since %></th>
                       <td>
                         <a href="/editUser/<%= user.id %>" class="btn btn-info"> <i class="fa-regular fa-pen-to-square"></i></a>
-
-                        <!--
-
-                         <a href="/bansUser/<%= user.id %>" onclick="confirmationBans(<%= user.id %> <%= user.bans %>);" class="btn btn-warning"> <i class=" fa fa-ban"></i></a> 
-                         <a href="/deletedUser/<%= user.id %>" onclick="confirmation(<%= user.id %>);" class="btn btn-danger"> <i class="fa-regular fa-trash-can"></i></a>
-
-                        -->
-
-                        <a onclick="confirmationBans(<%= user.id %> <%= user.bans %>);" class="btn btn-warning"> <i class=" fa fa-ban"></i></a> 
-                        <a onclick="confirmation(<%= user.id %>);" class="btn btn-danger"> <i class="fa-regular fa-trash-can"></i></a>
-                                      
+                        <a href="/bansUser/<%= user.id %>" onclick="confirmationBans(<%= user.id %> <%= user.bans %>);" class="btn btn-warning"> <i class=" fa fa-flag"></i></a> 
+                        <a href="/deletedUser/<%= user.id %>" onclick="confirmation(<%= user.id %>);" class="btn btn-danger"> <i class="fa-regular fa-trash-can"></i></a>     
                       </td>
                     </tr>                              
                   <% }) %>
@@ -55,9 +46,9 @@
         </div>
       </div><!-- /.container-fluid -->
     </section>
-
+    <%- include("template/alert") %>
+    <%- include("template/footer") %>
     <!-- /.content -->
   </div>
   <!-- /.content-wrapper -->
   
-  <%- include("template/footer") %>

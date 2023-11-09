@@ -2,10 +2,8 @@
 <%- include("template/navbar") %>
 <%- include("template/aside") %> 
 
-  <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
     <%- include('template/breadcrumb', {module: 'Edit Profile'}) %>
-    <!-- Content Header (Page header) -->
     <section class="content-header">
       <div class="container-fluid">
         <div class="row mb-2">
@@ -80,15 +78,11 @@
                   </div>   
                 </div>  
               </div>
-          
           <% } %>
           </div>
         </div>
-      </div><!-- /.container-fluid -->
+      </div>
     </section>
-
-    <!-- /.content -->
   </div>
-  <!-- /.content-wrapper -->
-  
+  <%- include("template/alert") %> <!-- sweetAlert2 -->
   <%- include("template/footer") %>

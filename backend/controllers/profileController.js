@@ -4,65 +4,74 @@ const conexion = require('../database/db')
 
 //procedure to update profile
 
-exports.updateProfile = (req, res) => {
-    const id = req.body.id
-    const image = req.body.image
-    const phone = req.body.phone
-    const location = req.body.location
-    
-    conexion.query('UPDATE profiles SET ? WHERE id = 22', [{ image:image, phone:phone, location:location}, id ], (error, results) => {
-        if(error) {
-            console.error(error)
-        } else {
-            res.redirect('/');
-        }
-    })
-}
-
-exports.showProfile = (req, res) => {
-    const id = req.body.id
-    const image = req.body.image
-    const phone = req.body.phone
-    const location = req.body.location
-
-    let show= `Select * FROM profiles WHERE rol=Subscriber `;
-    
-    conexion.query(show, [{ image:image, phone:phone, location:location}, id ], (error, results) => {
-        if(error) {
-            console.error(error)
-        } else {
-            res.redirect('/');
-        }
-    })
-}
-
-exports.editProfile = (req, res) => {
-    const id = req.params.id;
-    conexion.query('SELECT * FROM profiles WHERE id= ?', [id], (error, results) => {
-        if(error){
-            throw error;
-        } else {
-            if(row.rol=="Admin") {
-                res.render('editProfile', { profile: results[0], titleWeb: "My profile" })
-            } else {
-                res.render('index', { userName: row.name, image: row.image, titleWeb: "Control Dashboard"})
+exports.updateProfile = async (req, res) => {   
+    try {
+        const id = req.body.id
+        const image = req.body.image
+        const phone = req.body.phone
+        const location = req.body.location
+        conexion.query('UPDATE agends SET ? WHERE id = ?', [{ image:image, phone:phone, location:location, }, id ], (err, results) => {
+        if(err) {  
+                res.render('error', { errorMessage: err.message });
+            } else {   
+                res.render('profiles', {profile: results[0], titleWeb: " MY profile"})
             }
-        }
-    })
+        }) 
+    } catch (error) {
+        console.error('Error en la consulta a la base de datos:', error)
+        res.render('error', { errorMessage: 'Error en la consulta a la base de datos:' });
+        
+    }
 }
 
-
-exports.Profiles = (req, res) => {
-    conexion.query('SELECT * FROM profiles WHERE id = 22', (error, results) => { // aqui habra que filtrar
-        if(error){
-            throw error;
-        } else {
-            if (row.rol=="Admin") { // crear campo en tabla para poder comparar por otro parametro
-                res.render('profiles', { results: results, titleWeb: "my profile" })
-            } else {
-                res.render('index', { userName: row.name, image: row.image, titleWeb: "Control Dashboard"})
+exports.showProfile = async (req, res) => {   
+    try {
+        const id = req.body.id
+        const image = req.body.image
+        const phone = req.body.phone
+        const location = req.body.location
+        conexion.query(`SELECT * FROM profiles WHERE rol=Admin `,[{ image:image, phone:phone, location:location}, id ], (err, results) => {
+            if(err) {  
+                res.render('error', { errorMessage: err.message });
+            } else {   
+                res.render('profiles', {results: results, titleWeb: "Profiles"})
             }
-        }
-    })
+        }) 
+    } catch (error) {
+        console.error('Error en la consulta a la base de datos:', error)
+        res.render('error', { errorMessage: 'Error en la consulta a la base de datos:' });
+    }
+}
+
+exports.editProfile = async (req, res) => {   
+    try {
+        const id = req.body.id
+        conexion.query('SELECT * FROM profiles WHERE id= ?', [ id ], (err, results) => {
+            if(err) {  
+                res.render('error', { errorMessage: err.message });
+            } else {   
+                res.render('editProfile', {profiles: results[0], titleWeb: "My profile"})
+            }
+        }) 
+    } catch (error) {
+        console.error('Error en la consulta a la base de datos:', error)
+        res.render('error', { errorMessage: 'Error en la consulta a la base de datos:' });
+    }
+}
+
+exports.Profiles = async (req, res) => {   
+    try {
+        const id = req.params.id;
+        conexion.query('SELECT * FROM profiles WHERE id = 1',[id], (err, results) => {
+            if(err) {  
+                res.render('error', { errorMessage: err.message });
+            } else {   
+                res.render('profiles', { results: results, titleWeb: "Profiles", })
+            }
+        }) 
+    } catch (error) {
+        console.error('Error en la consulta a la base de datos:', error)
+        res.render('error', { errorMessage: 'Error en la consulta a la base de datos:' });
+    }
 }
 

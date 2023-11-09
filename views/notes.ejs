@@ -2,10 +2,9 @@
 <%- include("template/navbar") %>
 <%- include("template/aside") %>
 
-  <!-- Content Wrapper. Contains page content -->
+
   <div class="content-wrapper">
     <%- include('template/breadcrumb', {module: 'Notes'}) %>
-    <!-- Content Header (Page header) -->
     <section class="content-header">
       <div class="container-fluid">
         <div class="row mb-2">
@@ -17,26 +16,19 @@
                   <tr class="bg-primary text-white">
                     <th scope="col">#ID</th>
                     <th scope="col">Descripcion</th> 
-                    <th scope="col">Entrega</th> <!-- crear asignar nota a persona-->
-                    <th scope="col">Actions</th> <!-- crear asignar nota a persona-->
+                    <th scope="col">Entrega</th> 
+                    <th scope="col">Actions</th> 
                   </tr>
                 </thead>
                 <tbody>
                   <% results.forEach ((note) => { %>
-        
                     <tr>
                       <th><%= note.id %></th>
                       <th><%= note.descripcion %></th>
                       <th><%= note.date %></th>
                       <td>
-
-                       <!--
-                          <a href="/editNote/<%= note.id %>" onclick="confirmation(<%= note.id %>);" class="btn btn-danger"> <i class="fa-regular fa-trash-can"></i></a>  
-                          <a href="/deletedNote/<%= note.id %>" onclick="confirmation(<%= note.id %>);" class="btn btn-danger"> <i class="fa-regular fa-trash-can"></i></a>              
-                        -->
-
-                        <a href="/editNote/<%= note.id %>" class="btn btn-info"> <i class="fa-regular fa-pen-to-square"></i></a>
-                        <a onclick="confirmation(<%= note.id %>);" class="btn btn-danger"> <i class="fa-regular fa-trash-can"></i></a>              
+                          <a href="/editNote/<%= note.id %>" class="btn btn-info"> <i class="fa-regular fa-pen-to-square"></i></a>  
+                          <a href="/deletedNote/<%= note.id %>" onclick="confirmation_deleted(<%= note.id %>);" class="btn btn-danger"> <i class="fa-regular fa-trash-can"></i></a>                       
                       </td>
                     </tr>                              
                   <% }) %>
@@ -45,11 +37,10 @@
             </div>
           </div>
         </div>
-      </div><!-- /.container-fluid -->
+      </div>
     </section>
-
-    <!-- /.content -->
+    <%- include("template/alert") %> <!-- sweetAlert2 -->
+    <%- include("template/footer") %>
   </div>
-  <!-- /.content-wrapper -->
-  
-  <%- include("template/footer") %>
+
+ 

@@ -1,173 +1,195 @@
 //invoke the DB connection
 const conexion = require('../database/db')
 
-
 /**
- * @param procedure to save and create task with params: id, titulo, descripcion, vencimiento 
+ * @param procedure crear nueva tarea
  */
-
-exports.saveTask = (req, res) => {
-    const titulo = req.body.titulo
-    const descripcion = req.body.descripcion
-    const vencimiento = req.body.vencimiento
-    conexion.query('INSERT INTO tasks SET ?', {titulo:titulo, descripcion:descripcion, vencimiento:vencimiento}, (error, results) => {
-        if(error) {
-            console.error(error)
-        } else {
-            res.redirect('/');
-        }
-    });
-};
-
-/**
- * @param procedure to update task for id
- */
-
-exports.updateTask = (req, res) => {
-    const id = req.body.id
-    const titulo = req.body.titulo
-    const descripcion = req.body.descripcion
-    const vencimiento = req.body.vencimiento
-
-    conexion.query('UPDATE tasks SET ? WHERE id = ?', [{ titulo:titulo, descripcion:descripcion, vencimiento:vencimiento}, id ], (error, results) => {
-        if(error) {
-            console.error(error)
-        } else {
-            res.redirect('/');
-        }
-    })
+exports.saveTask = async (req, res) => {   
+    try {
+        const titulo = req.body.titulo
+        const descripcion = req.body.descripcion
+        const vencimiento = req.body.vencimiento
+        conexion.query('INSERT INTO tasks SET ?', {titulo:titulo, descripcion:descripcion, vencimiento:vencimiento}, (err, results) => {
+            if(err) {  
+                res.render('error', { errorMessage: err.message });
+            } else {   
+                res.redirect('/tasks')
+            }
+        }) 
+    } catch (error) {
+        console.error('Error en la consulta a la base de datos:', error)
+        res.render('error', { errorMessage: 'Error en la consulta a la base de datos:' });
+    }
 }
 
 /**
- * @param procedure to asigned taks for users
+ * @param procedure actualizar tarea
  */
-
-exports.asignatedTask = (req, res) => { // modificar el router
-    const id= req.params.id
-    conexion.query('UPDATE users SET asignada= true WHERE id= ?', [id], (error, results) => {
-        if(error){
-            throw error;
-        } else {
-            res.redirect('/taskAsigned')
-        }
-    })
+exports.updateTask = async (req, res) => {   
+    try {
+        const id = req.body.id
+        const titulo = req.body.titulo
+        const descripcion = req.body.descripcion
+        const vencimiento = req.body.vencimiento
+        conexion.query('UPDATE tasks SET ? WHERE id = ?', [{ titulo:titulo, descripcion:descripcion, vencimiento:vencimiento}, id ], (err, results) => {
+        if(err) {  
+                res.render('error', { errorMessage: err.message });
+            } else {   
+                res.render('tasks',{results: results[0], titleWeb: "Tasks"})
+            }
+        }) 
+    } catch (error) {
+        console.error('Error en la consulta a la base de datos:', error)
+        res.render('error', { errorMessage: 'Error en la consulta a la base de datos:' });
+    }
 }
 
 /***
- * @param procedure to asigned taks for users
+ * @param procedure mostrar todas las tareas
  */
-
-exports.tasks = (req, res) => { 
-    conexion.query('SELECT * FROM tasks', (error, results) => {
-        if(error){
-            throw error;
-        } else {
-            if (row.rol=="Admin") { 
-                res.render('tasks', { results: results, titleWeb: "List tasks" })
-            } else {
-                res.render('index', { userName: row.name, image: row.image, titleWeb: "Control Dashboard"})
+exports.tasks = async (req, res) => {   
+    try {
+        conexion.query('SELECT * FROM tasks', (err, results) => {
+            if(err) {  
+                res.render('error', { errorMessage: err.message });
+            } else {   
+                res.render('tasks', { results: results, titleWeb: "List Tasks"})
             }
-        }
-    })
+        }) 
+    } catch (error) {
+        console.error('Error en la consulta a la base de datos:', error)
+    }
 }
 
 /***
- * @param procedure show tasks completed 
+ * @param procedure mostrar tareas completadas
  */
-exports.taskCompleted = (req, res) => { 
-    conexion.query('SELECT * FROM completed_tasks', (error, results) => {
-        if(error){
-            throw error;
-        } else {
-            if (row.rol=="Admin") { 
-                res.render('taskCompleted', { results: results, titleWeb: "List tasks completed" })
-            } else {
-                res.render('index', { userName: row.name, image: row.image, titleWeb: "Control Dashboard"})
+exports.taskCompleted = async (req, res) => {   
+    try {
+        conexion.query('SELECT * FROM tasks WHERE estado = 1', (err, results) => {
+            if(err) {  
+                res.render('error', { errorMessage: err.message });
+            } else {   
+                res.render('taskCompleted', { results: results, titleWeb: "List tasks completed"})
             }
-        }
-    })
+        }) 
+    } catch (error) {
+        console.error('Error en la consulta a la base de datos:', error)
+    }
 }
 
 /***
  * @param procedure deleted task for id
  */
-exports.deleteTask = (req, res) => { 
-    const id = req.params.id
-    conexion.query('DELETE FROM tasks WHERE id= ?', [id], (error, results) => {
-        if(error){
-            throw error;
-        } else {
-            res.redirect('/tasks')
-        }
-    })
-}
-
-/***
- * @param procedure completed tasks
- */
-exports.completedTask = (req, res) => { 
-    const id= req.params.id
-    conexion.query('UPDATE users SET Estado = completado WHERE id= ?', [id], (error, results) => {
-        if(error){
-            throw error;
-        } else {
-            res.redirect('/taskCompleted')
-        }
-    })
-}
-
-/***
- * @param procedure asignated tasks a user
- */
-exports.completedTask = (req, res) => { 
-    const asignada= req.params.asignada
-    conexion.query('INSERT INTO tasks set asignada = asignada', [asignada], (error, results) => {
-        if(error){
-            throw error;
-        } else {
-            res.redirect('/taskDetails')
-        }
-    })
-}
-
-/***
- * @param procedure edit task 
- */
-exports.editTask = (req, res) => { 
-    const id = req.params.id;
-    conexion.query('SELECT * FROM tasks WHERE id= ?', [id], (error, results) => {
-        if(error){
-            throw error;
-        } else {
-            if(row.rol=="Admin") {
-                res.render('editTask', { task: results[0], titleWeb: "Edit task" })
-            } else {
-                res.render('index', { userName: row.name, image: row.image, titleWeb: "Control Dashboard"})
+exports.deleteTask = async (req, res) => {   
+    try {
+        const id = req.body.id
+        conexion.query('DELETE FROM tasks WHERE id= ?', [ id ], (err, results) => {
+            if(err) {  
+                res.render('error', { errorMessage: err.message });
+            } else {   
+                res.render('tasks', {results: results, titleWeb: "List tasks"})
             }
-        }
-    })
+        }) 
+    } catch (error) {
+        console.error('Error en la consulta a la base de datos:', error)
+    }
 }
 
 /***
- * @param procedure tasks details 
+ * @param procedure marcar como tarea completada por el usuario
  */
-exports.taskDetails = (req, res) => { 
-    const id = req.params.id;
-    conexion.query('SELECT * FROM tasks WHERE id= ?', [id], (error, results) => {
-        if(error){
-            throw error;
-        } else {
-            if (row.rol=="Admin") { 
-                res.render('taskDetails', { results: results, titleWeb: "List task completed details" })
-            } else {
-                res.render('index', { userName: row.name, image: row.image, titleWeb: "Control Dashboard"})
+exports.completedTask = async (req, res) => {   
+    try {
+        const id = req.body.id
+        conexion.query('UPDATE users SET Estado = completado WHERE id= ?', [id], (err, results) => {
+            if(err) {  
+                res.render('error', { errorMessage: err.message });
+            } else {   
+                res.render('taskCompleted', {results: results[0], titleWeb: "List tasks completed"})
             }
-        }
-    })
+        }) 
+    } catch (error) {
+        console.error('Error en la consulta a la base de datos:', error)
+    }
+}
+
+/***
+ * @param procedure edit tarea en particular
+ */
+exports.editTask = async (req, res) => {   
+    try {
+        const id = req.body.id
+        conexion.query('SELECT * FROM tasks WHERE id= ?', [ id ], (err, results) => {
+            if(err) {  
+                res.render('error', { errorMessage: err.message });
+            } else {   
+                res.render('editTask', {results: results[0], titleWeb: "Edit tasks"})
+            }
+        }) 
+    } catch (error) {
+        console.error('Error en la consulta a la base de datos:', error)
+    }
+}
+
+/***
+ * @param procedure mostrar todos los detalles de las tareas en vista: taskDetails.ejs 
+ */
+exports.taskDetails = async (req, res) => {   
+    try {
+        const id = req.params.id;
+        conexion.query('SELECT * FROM tasks WHERE id= ?', [id], (err, results) => {
+            if(err) {  
+                res.render('error', { errorMessage: err.message });
+            } else {   
+                res.render('taskDetails', { results: results, titleWeb: "Task details"})
+            }
+        }) 
+    } catch (error) {
+        console.error('Error en la consulta a la base de datos:', error)
+    }
+}
+
+/***
+ * @param procedure asignar tarea por el usuario
+ */
+exports.asignarTarea = async (req, res) => {   
+    try {
+        const taskId = req.body.taskId
+        const userId = req.body.userId
+        const consulta = 'INSERT INTO asignated (taskId, userId) VALUES (?, ?)';
+        conexion.query(consulta, [taskId, userId], (err, results) => {
+            if(err) {  
+                res.render('error', { errorMessage: err.message });
+            } else {   
+                res.render('asigned', { results: results, titleWeb: "Assigned tasks for users"})
+            }
+        }) 
+    } catch (error) {
+        console.error('Error en la consulta a la base de datos:', error)
+    }
 }
 
 
-
+/***
+ * @param procedure mostrar tabla de tareas asignadas en: views/asigned.ejs
+ */
+exports.mostrarTareaAsignada = async (req, res) => {   
+    try {
+        const taskId = req.body.taskId
+        const userId = req.body.userId
+        const consulta = 'SELECT * FROM asignated WHERE id= ?';
+        conexion.query(consulta, [taskId, userId], (err, results) => {
+            if(err) {  
+                res.render('error', { errorMessage: err.message });
+            } else {   
+                res.render('asigned', { results: results, titleWeb: "List tasks asigned"})
+            }
+        }) 
+    } catch (error) {
+        console.error('Error en la consulta a la base de datos:', error)
+    }
+}
 
 
 
