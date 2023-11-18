@@ -6,6 +6,7 @@ dotenv.config({path: './backend/env/.env'})
 const cookieParser = require('cookie-parser')
 const { json } = require('express')
 const multer = require('multer')
+const bodyParser = require('body-parser');
 
 //middlewares
 const storage = multer.diskStorage({
@@ -32,6 +33,7 @@ app.use(multer({
 
 app.set('view engine', 'ejs')
 app.use(express.urlencoded({extended:false}))
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser())
 app.use('/', require('./backend/routes/routes'))
 app.use(express.static(path.join(__dirname, '/public')))

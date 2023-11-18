@@ -2,7 +2,7 @@
 const conexion = require('../database/db')
 
 /**
- * @param procedure to update user set
+ * @param procedure subir imagen para usuario 
  */
 exports.uploadImage = async (req, res) => {   
     try {
@@ -10,7 +10,7 @@ exports.uploadImage = async (req, res) => {
         const image = req.file.filename
         conexion.query('UPDATE users SET ? WHERE id= ?', [{image:image}, id], (error, results) => {
         if(err) {  
-            res.render('error', { errorMessage: err.message})
+                res.render('error', { errorMessage: err.message})
             } else {   
                 res.redirect('/users')
             }

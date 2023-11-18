@@ -1,0 +1,44 @@
+<!-- Include FullCalendar CSS and JS -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://unpkg.com/fullcalendar@3.10.2/dist/fullcalendar.min.css" />
+  <script src="https://unpkg.com/jquery@3.6.0/dist/jquery.min.js"></script>
+  <script src="https://unpkg.com/moment@2.29.1/moment.min.js"></script>
+  <script src="https://unpkg.com/fullcalendar@3.10.2/dist/fullcalendar.min.js"></script>
+  <script src="https://unpkg.com/popper.js@2.11.6/dist/umd/popper.min.js"></script>
+  <script src="https://unpkg.com/bootstrap@5.7.2/dist/js/bootstrap.min.js"></script>
+</head>
+<body>
+  <div id="calendar"></div>
+  <script>
+    $(document).ready(function () {
+      $('#calendar').fullCalendar({
+        header: {
+          left: 'prev,next today',
+          center: 'title',
+          right: 'month,agendaWeek,agendaDay'
+        },
+        editable: true,
+        eventLimit: true, // allow "more" link when too many events
+        events: '/events',
+        eventDrop: function (event, delta, revertFunc) {
+          // Handle event drop here and update the backend
+        },
+        eventResize: function (event, delta, revertFunc) {
+          // Handle event resize here and update the backend
+        },
+        eventClick: function (event) {
+          // Handle event click here
+        },
+        selectable: true,
+        select: function (start, end) {
+          // Handle date range selection here
+        }
+      });
+    });
+  </script>
+</body>
+</html>

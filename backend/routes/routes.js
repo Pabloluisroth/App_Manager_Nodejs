@@ -6,8 +6,8 @@ const profileController = require('../controllers/profileController')
 const taskController = require('../controllers/taskController')
 const userController = require('../controllers/userController')
 const authController = require('../controllers/authController')
-const eventController = require('../controllers/eventController')
 const assignController = require('../controllers/assignController')
+const uploadController = require('../controllers/uploadController')
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// routes notes
 router.post('/saveNote', noteController.saveNote)
@@ -130,8 +130,6 @@ router.get('/createTask', authController.isAuthenticated,taskController.saveTask
     }
 })
 
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// routes for assign
-
 router.post('/assignTask/:id', assignController.assingTask );
 router.get('/asigned', assignController.showAssignedTasks) 
 
@@ -220,9 +218,6 @@ router.get('/createUser',authController.isAuthenticated , (req, res) => { // acc
         res.render('index', { userName: row.name, image: row.image, titleWeb: "Control Dashboard"})
     }
 })
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// EVENTOS
-
-
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// router for view
 router.get('/', authController.isAuthenticated, (req, res) => { res.render('index', { userName: row.name, image: row.image, titleWeb: "Control Dashboard"})}) 
@@ -234,19 +229,9 @@ router.post('/register', authController.register)
 router.post('/login', authController.login)
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// others routes
-router.post('/upload/:id', (req, res) => {
-    const id = req.params.id
-    const image = req.file.filename
-    conexion.query('UPDATE users SET ? WHERE id= ?', [{image:image}, id], (error, results) => {
-        if(error){
-            console.error(error);
-        } else {
-            res.redirect('/users')
-        }
-    })
-})
 
+router.post('/uploadImage/:id', uploadController.uploadImage)
 
-// rouer.post(./uploadImage)
+//
 
 module.exports = router;

@@ -28,8 +28,6 @@ conexion.connect ((err) => {
         descripcion varchar(100) not null unique key,
         vencimiento TIMESTAMP DEFAULT CURRENT_TIMESTAMP); 
 
-         
-
         create table if not exists notes(
         id int(11) primary key auto_increment,
         descripcion varchar(100) not null unique key,
@@ -68,6 +66,19 @@ module.exports = conexion
         province varchar(50) not null,
         address varchar(50) not null,
         since TIMESTAMP DEFAULT CURRENT_TIMESTAMP);
+
+        
+CREATE TABLE IF NOT EXISTS events (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  title VARCHAR(255) NOT NULL,
+  start DATETIME NOT NULL,
+  end DATETIME,
+  description TEXT
+);
+
+            // falta (  y asigned )
+
+
 */
 
 
